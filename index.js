@@ -1,0 +1,63 @@
+const fs = require('fs')
+const path = require('path')
+const express = require('express')
+const bodyParser = require('body-parser')
+const markdown = require('markdown-to-pug')
+const renderFile = require('promise-exec')
+const uniqid = require('uniqid')
+const app = express()
+const pug = new markdown()
+
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use(bodyParser.json())
+
+const createFile = (name, content) => {
+  const fileName = uniqid(`${name}-`)
+  const file = path.join(process.cwd(), 'build', fileName)
+
+  return new Promise((resolve, reject) => {
+    fs.writeFile(`${file}.pug`, content, (err, done) => {
+      if (err) {
+        return reject(err)
+      }
+
+      return resolve({
+        file: `${file}.pug`,
+        fileName: fileName
+      })
+    })
+  })
+}
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html')
+})
+
+app.post('/', async (req, res) => {
+  const { name, content } = req.body
+  const template = pug.render(content) + '\nstyle\n include:scss ../style.scss'
+  const { file, fileName } = await createFile(name, template)
+  
+  await renderFile(`relaxed ${file} --build-once`)
+
+  res.json({
+    name: fileName
+  })
+})
+
+app.get('/preview/:name', (req, res) => {
+  const data = fs.readFileSync(path.resolve(__dirname, 'build', req.params.name + '.pdf'))
+
+  res.writeHead(200, {
+    'Content-Type': 'application/pdf',
+    'Content-disposition': 'inline;filename=' + req.params.name,
+    'Content-Length': data.length
+  })
+
+  res.end(new Buffer(data, 'binary'))
+})
+
+app.listen(3100)
+
+console.log('Server listen at http://localhost:3100')
