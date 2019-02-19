@@ -3,8 +3,9 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const markdown = require('markdown-to-pug')
-const renderFile = require('promise-exec')
+const execute = require('promise-exec')
 const uniqid = require('uniqid')
+const outdent = require('outdent')
 const app = express()
 const pug = new markdown()
 
@@ -35,11 +36,17 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', async (req, res) => {
-  const { name, content } = req.body
-  const template = pug.render(content) + '\nstyle\n include:scss ../style.scss'
+  const { name, theme, content } = req.body
+  const template = outdent`
+    ${pug.render(content)}
+    style
+      include:scss ../styles/main.scss
+      ${ theme ? `include:scss ../styles/theme/${theme}.scss` : ''}
+  `
   const { file, fileName } = await createFile(name, template)
-  
-  await renderFile(`relaxed ${file} --build-once`)
+
+  await execute(`relaxed ${file} --build-once`)
+  await execute('cd ./build && ls | grep ".htm" | xargs rm && ls | grep ".pug" | xargs rm')
 
   res.json({
     name: fileName

@@ -27,10 +27,22 @@
   <div class="container-fluid my-4">
     <div class="row">
       <div class="col-6">
-        <input type="text" class="form-control" id="name" value="Document">
+        <div class="row">
+          <div class="col-4">
+            <input type="text" class="form-control" id="name" value="Document">
+          </div>
+          <div class="col-4">
+            <select name="theme" class="form-control" id="theme">
+              <option value="simple">Simple</option>
+              <option value="paper">Paper</option>
+            </select>
+          </div>
+          <div class="col-4">
+            <button class="btn btn-primary" id="generate">Generate</button>
+          </div>
+        </div>
         <br>
         <textarea id="editor"></textarea>
-        <button class="btn btn-primary" id="generate">Generate</button>
       </div>
       <div class="col-6">
         <embed type="application/pdf" id="preview" style="width: 100%; height: 100vh; background-color: #EDEDED;"></embed>
@@ -51,12 +63,14 @@
 
     $('#generate').click(function() {
       var name = $('#name').val()
+      var theme = $('#theme').val()
 
       $.ajax({
         method: 'post',
         url: '/',
         data: {
           name: name,
+          theme: theme,
           content: simplemde.value()
         }
       })
