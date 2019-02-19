@@ -1,4 +1,57 @@
-h4 {
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300|Playfair+Display:700');
+
+@page {
+  margin-left: 2cm;
+  margin-top: 2cm;
+  margin-right: 1cm;
+  margin-bottom: 2cm;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+h1 {
+  font-size: 3rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100px;
+    height: 2px;
+    background-color: #000;
+  }
+}
+
+p {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+blockquote {
   font-style: italic;
+  margin: 1rem;
+  margin-left: 0;
+}
+
+.page-break {
+  page-break-before: always;
+}
+
+.page-header {
+  display: none;
+}
+
+.page-footer {
+  display: none;
 }
