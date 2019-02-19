@@ -19,7 +19,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheatsheet</a>
         </li>
       </ul>
     </div>
@@ -33,7 +33,6 @@
           </div>
           <div class="col-4">
             <select name="theme" class="form-control" id="theme">
-              <option value="simple">Simple</option>
               <option value="paper">Paper</option>
             </select>
           </div>
@@ -59,7 +58,7 @@
       element: document.getElementById("editor")
     })
 
-    simplemde.value("# Hello\nWrite some text here")
+    simplemde.value("# Relaxed document editing with web technologies\n#### Puggy McPugface, Travis C.I. Jenkins, Essie S. Hess, Zulko de Coverage\n\n> Mainstream documents editor, such as MS Office or Google Docs, are often shuned by the technical community in favor of mark-up languages (Markdown, LaTeX, etc.), more adapted to technical writings and, more generally, to the.\n\n$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$\n\nHowever, Markdown and LaTeX make it difficult to edit documents with a\nstructure differing from the standard title-sections-paragraphs\norganization. In particular, LaTeX can be a fringing pain everytime you just\nwant to move a damn image and you can't because you don't have a PhD in\nLaTeX and you keep getting cryptic error messages because certainly\nsomewhere a bracket is missing.\n\nIn this paper we introduce a new PDF edition system ReLaXed, which takes\nadvantage of the latest web technologies to enable fast, reliable PDF\ngeneration from languages such as Pug, HTML, or CSS, and relying on Google\nChrome for rendering.\n\nFrom now on it is only placeholder text. Current CSS frameworks will make\nsure your documents will look clean and modern. Javascript frameworks can\nplot schemas, highlight code, or render maths equations the same way LaTeX\ndoes. Millions of people (and growing) are now fluent in these technologies.\nShorthand languages like Pug and SCSS are finally making it fun to write\nHTML and CSS. (Headless) web browsers can easily turn all these technologies\ninto PDF, on any platform.")
 
     $('#generate').click(function() {
       var name = $('#name').val()

@@ -65,7 +65,9 @@ yarn.lock
 package-lock.json
 
 # Build
-build
+build/*.pdf
+build/*.pug
+build/*.htm
 
 # DS_Store
 .DS_Store

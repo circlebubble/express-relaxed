@@ -36,7 +36,7 @@ const createFile = (name, content) => {
 }
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html')
+  res.sendFile(__dirname + '/example/browser.html')
 })
 
 app.post('/', async (req, res) => {
