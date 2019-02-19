@@ -24,9 +24,11 @@ This boilerplate have 3 route with function like table below :
 
 The route of `POST /` require parameter to generate a PDF with detail like this.
 
-| `name` | : | The name of document |
-| `theme` | : | Theme that will be use |
-| `content` | : | A `Markdown` content to be generate |
+| Param | Description |
+| :---: | :--- |
+| `name` | The name of document |
+| `theme` | Theme that will be use |
+| `content` | A `Markdown` content to be generate |
 
 ### License
 
