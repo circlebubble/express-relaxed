@@ -14,6 +14,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 const createFile = (name, content) => {
+  if (!fs.existsSync(path.join(process.cwd(), 'build'))) {
+    fs.mkdirSync(path.join(process.cwd(), 'build'))
+  }
+
   const fileName = uniqid(`${name}-`)
   const file = path.join(process.cwd(), 'build', fileName)
 
