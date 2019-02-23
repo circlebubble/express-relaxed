@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const cors = require('cors')
 const express = require('express')
 const bodyParser = require('body-parser')
 const execute = require('promise-exec')
@@ -7,8 +8,8 @@ const template = require('./template')
 const uniqid = require('uniqid')
 const app = express()
 
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
-
 app.use(bodyParser.json())
 
 const createFile = (name, content) => {

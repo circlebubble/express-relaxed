@@ -11,6 +11,7 @@
   "private": false,
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "markdown-to-pug": "^1.0.11",
     "outdent": "^0.7.0",

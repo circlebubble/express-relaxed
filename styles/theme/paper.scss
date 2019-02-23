@@ -55,3 +55,17 @@ blockquote {
 .page-footer {
   display: none;
 }
+
+table {
+  width: 100%;
+  border: 0;
+
+  th, td {
+    border: 0;
+    padding: .5rem 1rem;
+    background-color: #dedede;
+  }
+  td {
+    background-color: #ffffff;
+  }
+}
