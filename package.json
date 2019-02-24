@@ -11,6 +11,8 @@
   "private": false,
   "dependencies": {
     "body-parser": "^1.18.3",
+    "chart.js": "^2.7.3",
+    "chartjs-node": "^1.7.1",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "markdown-to-pug": "^1.0.11",

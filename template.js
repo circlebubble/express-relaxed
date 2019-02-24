@@ -2,7 +2,7 @@ const markdown = require('markdown-to-pug')
 const pug = new markdown()
 const outdent = require('outdent')
 
-module.exports = (theme, content) => {
+module.exports = (theme, content, generatedChart) => {
   return outdent`
     style
       ${ theme ? `include:scss ../styles/theme/${theme}.scss` : ''}
@@ -19,5 +19,9 @@ module.exports = (theme, content) => {
           margin-right: 1cm;
         }
       .page-footer #[span.pageNumber] / #[span.totalPages]
-  `
+  `.replace(/\[charts-.+\]/gm, (match, _, content) => {
+    const position = match.match(/-(.*)\]/).pop()
+
+    return `\n  img(src="./${generatedChart[parseInt(position) - 1]}.png",alt="")`
+  })
 }
