@@ -15,12 +15,12 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(process.cwd(), 'example')))
 
 const createFile = (name, content) => {
-  if (!fs.existsSync(path.join(process.cwd(), 'build'))) {
-    fs.mkdirSync(path.join(process.cwd(), 'build'))
+  if (!fs.existsSync(path.join(process.cwd(), 'render'))) {
+    fs.mkdirSync(path.join(process.cwd(), 'render'))
   }
 
   const fileName = uniqid(`${name}-`)
-  const file = path.join(process.cwd(), 'build', fileName)
+  const file = path.join(process.cwd(), 'render', fileName)
 
   return new Promise((resolve, reject) => {
     fs.writeFile(`${file}.pug`, content, (err, done) => {
@@ -45,7 +45,7 @@ const renderGraph = (options) => {
       .then(() => {
         const chartName = uniqid('chart-')
 
-        chartNode.writeImageToFile('image/png', `${path.join(process.cwd(), 'build', chartName)}.png`)
+        chartNode.writeImageToFile('image/png', `${path.join(process.cwd(), 'render', chartName)}.png`)
 
         resolve(chartName)
       })
@@ -76,7 +76,7 @@ app.post('/', async (req, res) => {
   const { file, fileName } = await createFile(name, template(theme, content, generatedChart))
 
   await execute(`relaxed ${file} --build-once`)
-  await execute('cd ./build && ls | grep ".htm" | xargs rm && ls | grep ".pug" | xargs rm && ls | grep ".png" | xargs rm')
+  await execute('cd ./render && ls | grep ".htm" | xargs rm && ls | grep ".pug" | xargs rm && ls | grep ".png" | xargs rm')
 
   res.json({
     name: fileName
@@ -84,11 +84,11 @@ app.post('/', async (req, res) => {
 })
 
 app.get('/preview/:name', (req, res) => {
-  const data = fs.readFileSync(path.resolve(__dirname, 'build', req.params.name + '.pdf'))
+  const data = fs.readFileSync(path.resolve(__dirname, 'render', req.params.name + '.pdf'))
 
   res.writeHead(200, {
     'Content-Type': 'application/pdf',
-    'Content-disposition': 'inline;filename=' + req.params.name,
+    'Content-disposition': 'inline;filename=' + req.params.name + '.pdf',
     'Content-Length': data.length
   })
 
