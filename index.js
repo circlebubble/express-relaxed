@@ -52,11 +52,11 @@ const renderGraph = (options) => {
   })
 }
 
-const createGraph = (graphs) => {
+const createGraph = (charts) => {
   return new Promise(resolve => {
-    if (!graphs) resolve('no chart rendered')
+    if (!charts) resolve('')
 
-    Promise.all(JSON.parse(graphs).map(item => {
+    Promise.all(JSON.parse(charts).map(item => {
       return renderGraph(item)
     }))
     .then(res => {
