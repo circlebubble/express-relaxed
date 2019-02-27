@@ -5,8 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "node axios.js"
+    "start": "nodemon src/index.js"
   },
   "private": false,
   "dependencies": {
@@ -15,10 +14,13 @@
     "chartjs-node": "^1.7.1",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "handlebars": "^4.1.0",
     "html2pug": "^2.0.1",
+    "markdown-to-json": "^0.5.1",
     "markdown-to-pug": "^1.0.11",
     "outdent": "^0.7.0",
     "promise-exec": "^0.1.0",
+    "remove": "^0.1.5",
     "uniqid": "^5.0.3"
   },
   "devDependencies": {
