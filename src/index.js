@@ -1,6 +1,7 @@
 const Fs = require('fs')
 const Path = require('path')
 const Cors = require('cors')
+const Slugify = require('slugify')
 const Express = require('express')
 const Render = require('./renderer')
 const Parser = require('body-parser')
@@ -22,7 +23,7 @@ app.post('/', async (req, res) => {
 
   const diagram = await createGraph(charts)
   const markdown = await createFile(name, content, 'md')
-  const { file, fileName } = await createFile(name, Render(name, theme, content, diagram, markdown), 'pug')
+  const { file, fileName } = await createFile(Slugify(name), Render(name, theme, content, diagram, markdown), 'pug')
 
   await Execute(`relaxed ${file} --build-once`)
   await Execute('find ./build -type f -not -name "*.yml" -not -name "*.pdf" -delete')
