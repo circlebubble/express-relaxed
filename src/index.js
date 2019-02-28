@@ -22,7 +22,7 @@ app.post('/', async (req, res) => {
 
   const diagram = await createGraph(charts)
   const markdown = await createFile(name, content, 'md')
-  const { file, fileName } = await createFile(name, Render(theme, content, markdown, diagram), 'pug')
+  const { file, fileName } = await createFile(name, Render(name, theme, content, diagram, markdown), 'pug')
 
   await Execute(`relaxed ${file} --build-once`)
   await Execute('find ./build -type f -not -name "*.yml" -not -name "*.pdf" -delete')

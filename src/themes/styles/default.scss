@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300|Playfair+Display:700');
+
+// General
+@page {
+  margin-left: 2cm;
+  margin-top: 1.5cm;
+  margin-right: 1cm;
+  margin-bottom: 1.5cm;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+}
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+.page-break {
+  page-break-before: always;
+}
+
+// Utilities
+h1 {
+  font-size: 2rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+  line-height: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100px;
+    height: 2px;
+    background-color: #dedede;
+  }
+}
+
+p {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+blockquote {
+  font-style: italic;
+  margin: 1rem;
+  margin-left: 0;
+}
+
+table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+table * {
+  position: relative;
+}
+table td, table th {
+  padding-left: 8px;
+}
+table thead tr {
+  height: 60px;
+  border-top: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
+}
+table tbody tr {
+  height: 50px;
+}
+table tbody tr:last-child {
+  border: 0;
+}
+table td, table th {
+  text-align: left;
+}
+tbody tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+tbody tr {
+  font-size: 15px;
+  line-height: 1.2;
+  font-weight: unset;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+// Design
+.header {
+  width: 100vw;
+
+  &_inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;  
+  }
+  &_logo {
+    width: auto;
+    height: 50px;
+  }
+  &_title {
+    font-weight: 500;
+    font-size: 1.4rem;
+  }
+  &_tagline {
+    margin-top: 1rem;
+    font-style: italic;
+    font-size: .8rem;
+    border-top: 1px solid #dedede;
+    padding: 1rem 0;
+    border-bottom: 1px solid #dedede;
+  }
+}

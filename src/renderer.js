@@ -24,7 +24,7 @@ const Replace  = (string, chart) => {
     })
 }
 
-module.exports = (theme, string, { file, fileName }, diagram) => {
+module.exports = (name, theme, string, diagram, { file, fileName }) => {
   const source = Fs.readFileSync(`${Path.join(process.cwd(), 'src/themes/template', theme)}.pug`, 'utf-8')
   const data = Markdown.parse([file], {
     minify: false,
@@ -33,13 +33,16 @@ module.exports = (theme, string, { file, fileName }, diagram) => {
   })
   const render = Render.compile(source)
   const content = Replace(string, diagram)
+  const json = JSON.parse(data)[fileName]
+
+  json['name'] = name
 
   return Outdent`
     style
       ${ theme ? `include:scss ../src/themes/styles/${theme}.scss` : '' }
 
     ${
-      render(JSON.parse(data)[fileName])
+      render(json)
         .replace('<!--CONTENT-->', Pug.render(content))
         .replace(/p.(\$.+)|p.(img.+)/gm, (_, equation, tag) => {
           if (equation && equation.includes('$')) {
