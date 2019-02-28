@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Express Relaxed</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.css">
+  <style>
+    .CodeMirror {
+      height: 500px;
+    }
+    #preview {
+      width: 100%;
+      height: 600px;  
+      background-color: #EDEDED;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheatsheet</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container-fluid my-4">
+    <div class="row">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <input type="text" class="form-control" id="name" value="Document">
+          </div>
+          <div class="col-4">
+            <select name="theme" class="form-control" id="theme">
+              <option value="paper">Paper</option>
+            </select>
+          </div>
+          <div class="col-4">
+            <button class="btn btn-primary" id="generate">Generate</button>
+          </div>
+        </div>
+        <br>
+        <textarea id="editor"></textarea>
+      </div>
+      <div class="col-6">
+        <embed type="application/pdf" id="preview"></embed>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.js"></script>
+  <script src="/utils.js"></script>
+  <script>
+    var simplemde = new SimpleMDE({
+      element: document.getElementById("editor")
+    })
+
+    simplemde.value(
+      '---\n'+
+      'logo: Logo Here\n'+
+      'title: Title Here\n'+
+      'tagline: Tagline Here\n'+
+      '---\n'+
+      '# Relaxed document editing with web technologies\n\n'+
+      '#### Puggy McPugface, Travis C.I. Jenkins, Essie S. Hess, Zulko de Coverage\n\n'+
+      '> Mainstream documents editor, such as MS Office or Google Docs, are often shuned by the technical community in favor of mark-up languages (Markdown, LaTeX, etc.), more adapted to technical writings and, more generally, to the.\n\n'+
+      '$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$\n\n'+
+      '[charts](1)\n\n'+
+      'However, Markdown and LaTeX make it difficult to edit documents with a structure differing from the standard title-sections-paragraphs organization. In particular, LaTeX can be a fringing pain everytime you just want to move a damn image and you can\'t because you don\'t have a PhD in LaTeX and you keep getting cryptic error messages because certainly somewhere a bracket is missing.\n\n'+
+      'In this paper we introduce a new PDF edition system ReLaXed, which takes advantage of the latest web technologies to enable fast, reliable PDF generation from languages such as Pug, HTML, or CSS, and relying on Google Chrome for rendering.\n\n'+
+      '<!-- break -->\n\n'+
+      '[charts](2)\n\n'+
+      'From now on it is only placeholder text. Current CSS frameworks will make sure your documents will look clean and modern. Javascript frameworks can plot schemas, highlight code, or render maths equations the same way LaTeX does. Millions of people (and growing) are now fluent in these technologies.\n\n'+
+      '| Tables        | Are           | Cool  |\n'+
+      '| ------------- |:-------------:| -----:|\n'+
+      '| col 3 is      | right-aligned | $1600 |\n'+
+      '| col 2 is      | centered      |   $12 |\n'+
+      '| zebra stripes | are neat      |    $1 |\n\n'+
+      '<!-- break -->\n\n'+
+      'Shorthand languages like Pug and SCSS are finally making it fun to write HTML and CSS. (Headless) web browsers can easily turn all these technologies into PDF, on any platform.'
+    )
+
+    var sampleChart = [
+      {
+        width: 1200,
+        height: 400,
+        type: "bar",
+        data: {
+          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          datasets: [
+            {
+              label: "# of Votes",
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)"
+              ],
+              borderColor: [
+                "rgba(255,99,132,1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)"
+              ],
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          responsive: false,
+          animation: false,
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true
+                }
+              }
+            ]
+          },
+          tooltips: {
+            mode: "label"
+          }
+        }
+      },
+      {
+			type: 'line',
+        width: 1200,
+        height: 400,
+			data: {
+				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+				datasets: [{
+					label: 'My First dataset',
+					borderColor: window.chartColors.red,
+					backgroundColor: window.chartColors.red,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+				}, {
+					label: 'My Second dataset',
+					borderColor: window.chartColors.blue,
+					backgroundColor: window.chartColors.blue,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+				}, {
+					label: 'My Third dataset',
+					borderColor: window.chartColors.green,
+					backgroundColor: window.chartColors.green,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+				}, {
+					label: 'My Third dataset',
+					borderColor: window.chartColors.yellow,
+					backgroundColor: window.chartColors.yellow,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+				}]
+			},
+			options: {
+				responsive: true,
+				title: {
+					display: true,
+					text: 'Chart.js Line Chart - Stacked Area'
+				},
+				tooltips: {
+					mode: 'index',
+				},
+				hover: {
+					mode: 'index'
+				},
+				scales: {
+					xAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'Month'
+						}
+					}],
+					yAxes: [{
+						stacked: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Value'
+						}
+					}]
+				}
+			}
+		}
+    ]
+
+    $('#generate').click(function() {
+      var name = $('#name').val()
+      var theme = $('#theme').val()
+
+      $.ajax({
+        method: 'post',
+        url: '/',
+        data: {
+          name: name,
+          theme: theme,
+          content: simplemde.value(),
+          charts: JSON.stringify(sampleChart)
+        }
+      })
+      .then(res => {
+        $('#preview').attr('src', '/preview/' + res.name)
+      })
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+div {{logo}}
+h1 {{title}}
+blockquote {{tagline}}
+
+<!--CONTENT-->
+
+template#page-footer
+  style(type='text/css').
+    .page_number {
+      font-size: 10px;
+      color: #aaa;
+      font-family: Helvetica;
+      font-weight: bold;
+      width: 1000px;
+      border-top: 1px solid #aaa;
+      margin-left: 10%;
+      margin-right: 10%;
+      padding-top: 1mm;
+      margin-bottom: -1mm;
+      text-align: center;
+    }
+  
+  .page_number Page #[span.pageNumber] / #[span.totalPages]
