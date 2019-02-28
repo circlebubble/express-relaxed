@@ -48,14 +48,6 @@ blockquote {
   page-break-before: always;
 }
 
-.page-header {
-  display: none;
-}
-
-.page-footer {
-  display: none;
-}
-
 table {
   width: 100%;
   border: 0;
@@ -73,4 +65,28 @@ table {
 img {
   width: 100%;
   height: auto;
+}
+.header {
+  width: 100%;
+  padding: 1rem 0;
+  display: flex;
+  background-color: blue;
+  color: #ffffff;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+
+  &_inner {
+
+    img {
+      width: 50px;
+      height: auto;
+    }
+  }
+  &_title {
+
+  }
+  &_tagline {
+
+  }
 }

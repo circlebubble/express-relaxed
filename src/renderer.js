@@ -16,7 +16,7 @@ const Replace  = (string, chart) => {
     .replace(REG_DETAIL, '')
     .replace(REG_CHART, (tag, index) => {
       if (index) {
-        return `  img(src="./${chart[parseInt(index) - 1]}.png" )`
+        return `img(src="./${chart[parseInt(index) - 1]}.png")`
       }
     })
     .replace(REG_BREAK, (tag, index) => {
@@ -36,7 +36,7 @@ module.exports = (theme, string, { file, fileName }, diagram) => {
 
   return Outdent`
     style
-      ${ theme ? `include:scss ../src/themes/styles/${theme}.scss` : ''}
+      ${ theme ? `include:scss ../src/themes/styles/${theme}.scss` : '' }
 
     ${
       render(JSON.parse(data)[fileName])
