@@ -1,3 +1,5 @@
+require('dotenv').config('.env')
+
 const Fs = require('fs')
 const Path = require('path')
 const Cors = require('cors')
@@ -10,6 +12,9 @@ const Execute = require('promise-exec')
 const { createFile, createGraph } = require('./utils')
 
 const app = Express()
+
+const host = process.env.HOST
+const port = process.env.PORT
 
 app.use(Cors())
 app.use(Parser.urlencoded({ extended: false }))
@@ -78,6 +83,6 @@ app.get('/', (req, res) => {
   `)
 })
 
-app.listen(3100)
+app.listen(port)
 
-console.log('Server listen at http://localhost:3100')
+console.log(`Server listening on http://${host}:${port}`)
