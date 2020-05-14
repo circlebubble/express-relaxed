@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "axios": "0.19.2",
-    "nodemon": "2.0.3"
+    "nodemon": "2.0.4"
   }
 }
